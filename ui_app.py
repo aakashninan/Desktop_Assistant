@@ -5,120 +5,142 @@ from agent.core import run_agent
 # PAGE CONFIG
 # -----------------------------
 st.set_page_config(
-    page_title="Workspace",
-    page_icon="💻",
+    page_title="Desktop Assistant",
+    page_icon="⚡",
     layout="wide"
 )
 
 # -----------------------------
-# GLOBAL STYLE (clean + minimal)
+# PROFESSIONAL UI INJECTION
 # -----------------------------
 st.markdown("""
 <style>
-    html, body, [class*="css"]  {
-        font-family: "Inter", sans-serif;
+    /* Global Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
     }
 
-    .chat-container {
-        max-width: 800px;
-        margin: auto;
+    /* Remove Streamlit Header/Footer */
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .block-container {padding-top: 2rem; padding-bottom: 0rem;}
+
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background-color: #0f172a;
+        color: white;
+        border-right: 1px solid #1e293b;
     }
 
-    .msg-user {
-        background: #f3f4f6;
-        color: #111827;
-        padding: 10px 14px;
-        border-radius: 10px;
-        margin: 6px 0;
+    /* Main Container */
+    .main-chat-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
     }
 
-    .msg-bot {
-        background: #e5e7eb;
-        color: #111827;
-        padding: 10px 14px;
-        border-radius: 10px;
-        margin: 6px 0;
+    /* Professional Message Bubbles */
+    .chat-bubble {
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        max-width: 85%;
+        line-height: 1.5;
+        font-size: 14px;
+        animation: fadeIn 0.3s ease-in;
     }
 
-    .title {
-        font-size: 20px;
-        font-weight: 600;
-        color: #111827;
-        margin-bottom: 10px;
+    .user-bubble {
+        background-color: #ffffff;
+        color: #1e293b;
+        align-self: flex-end;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    .subtitle {
-        font-size: 13px;
-        color: #6b7280;
-        margin-bottom: 20px;
+    .assistant-bubble {
+        background-color: #f8fafc;
+        color: #334155;
+        align-self: flex-start;
+        border-left: 4px solid #3b82f6;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Command Tag Style */
+    .cmd-tag {
+        background: #1e293b;
+        color: #94a3b8;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 12px;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# SIDEBAR (minimal)
+# SIDEBAR (Control Center)
 # -----------------------------
 with st.sidebar:
-    st.markdown("### Workspace")
-    st.write("Local system assistant")
-
-    if st.button("Clear conversation"):
-        st.session_state.chat = []
-
+    st.markdown("<h1 style='font-size: 22px;'>Desktop Assistant</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #94a3b8; font-size: 13px;'>Active Terminal Session</p>", unsafe_allow_html=True)
+    
     st.markdown("---")
-    st.write("Commands:")
-    st.write("- open chrome")
-    st.write("- list files")
-    st.write("- open file.pdf")
+    
+    st.markdown("### 📡 System Info")
+    st.caption("OS: macOS / Linux Core/Windows")
+    st.caption("Status: Connected")
+    
+    if st.button("Reset Environment", use_container_width=True):
+        st.session_state.chat_history = []
+        st.rerun()
 
 # -----------------------------
-# HEADER
+# MAIN INTERFACE
 # -----------------------------
-st.markdown('<div class="title">Workspace</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">Local command interface for your computer</div>', unsafe_allow_html=True)
+st.markdown("## Workspace")
+st.markdown("<p style='color: #64748b;'>Control your local environment via natural language.</p>", unsafe_allow_html=True)
 
-# -----------------------------
-# INIT CHAT
-# -----------------------------
-if "chat" not in st.session_state:
-    st.session_state.chat = []
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
-# -----------------------------
-# CHAT RENDER
-# -----------------------------
-st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+# Chat Area
+chat_placeholder = st.container()
 
-for msg in st.session_state.chat:
-    if msg["role"] == "user":
-        st.markdown(f'<div class="msg-user">You: {msg["content"]}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div class="msg-bot">System: {msg["content"]}</div>', unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# -----------------------------
-# INPUT
-# -----------------------------
-col1, col2 = st.columns([6, 1])
-
-with col1:
-    user_input = st.text_input(
-        "",
-        placeholder="Type a command...",
-        label_visibility="collapsed"
-    )
-
-with col2:
-    send = st.button("Send")
+with chat_placeholder:
+    for chat in st.session_state.chat_history:
+        role_class = "user-bubble" if chat["role"] == "user" else "assistant-bubble"
+        st.markdown(f"""
+            <div style="display: flex; flex-direction: column;">
+                <div class="chat-bubble {role_class}">
+                    <b>{"You" if chat["role"] == "user" else "Assistant"}</b><br>
+                    {chat["content"]}
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
 
 # -----------------------------
-# LOGIC
+# ACTION BAR (Bottom Fixed-Style)
 # -----------------------------
-if send and user_input:
-    st.session_state.chat.append({"role": "user", "content": user_input})
-
-    response = run_agent(user_input)
-
-    st.session_state.chat.append({"role": "assistant", "content": response})
-
+# We use st.chat_input as it's the only one that stays pinned and looks modern
+if prompt := st.chat_input("Enter a system command (e.g., 'Open Chrome')"):
+    
+    # Update History
+    st.session_state.chat_history.append({"role": "user", "content": prompt})
+    
+    # Process
+    with st.spinner("Processing system request..."):
+        try:
+            response = run_agent(prompt)
+        except Exception as e:
+            response = f"Critical Error: {str(e)}"
+    
+    st.session_state.chat_history.append({"role": "assistant", "content": response})
     st.rerun()
