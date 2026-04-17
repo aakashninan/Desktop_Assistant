@@ -1,0 +1,19 @@
+# Local LLM & API
+requests==2.32.4
+pydantic==1.10.22
+urllib3==2.4.0
+
+# Desktop Automation & Agent Tasks
+SpeechRecognition==3.16.0
+pyttsx3==2.99
+PyAudio==0.2.14
+# Note: your friend will need 'pip install pywin32' on Windows
+
+# Data & UI (If you're using them for the agent interface)
+streamlit==1.51.0
+pandas==3.0.0
+numpy==2.4.2
+
+# Utilities
+python-dateutil==2.9.0.post0
+python-dotenv
