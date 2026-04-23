@@ -1,4 +1,5 @@
 import streamlit as st
+import json
 from agent.core import run_agent
 
 # -----------------------------
@@ -86,6 +87,47 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------
+# HELPER: Parse agent response
+# -----------------------------
+def parse_response(raw_response):
+    """Extract clean text from JSON-wrapped agent responses."""
+    if not isinstance(raw_response, str):
+        return str(raw_response)
+    
+    stripped = raw_response.strip()
+    
+    # Try direct JSON parse
+    try:
+        parsed = json.loads(stripped)
+        if isinstance(parsed, dict):
+            # Common keys the agent might use
+            for key in ("content", "answer", "message", "text", "result", "output"):
+                if key in parsed and isinstance(parsed[key], str):
+                    return parsed[key].strip()
+            # Fallback: join all string values
+            values = [v for v in parsed.values() if isinstance(v, str)]
+            if values:
+                return " ".join(values).strip()
+    except (json.JSONDecodeError, TypeError):
+        pass
+
+    # Handle cases where JSON is embedded inside extra text
+    start = stripped.find("{")
+    end = stripped.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        try:
+            parsed = json.loads(stripped[start:end + 1])
+            if isinstance(parsed, dict):
+                for key in ("content", "answer", "message", "text", "result", "output"):
+                    if key in parsed and isinstance(parsed[key], str):
+                        return parsed[key].strip()
+        except (json.JSONDecodeError, TypeError):
+            pass
+
+    # Return as-is if not JSON
+    return raw_response
+
+# -----------------------------
 # SIDEBAR (Control Center)
 # -----------------------------
 with st.sidebar:
@@ -129,7 +171,6 @@ with chat_placeholder:
 # -----------------------------
 # ACTION BAR (Bottom Fixed-Style)
 # -----------------------------
-# We use st.chat_input as it's the only one that stays pinned and looks modern
 if prompt := st.chat_input("Enter a system command (e.g., 'Open Chrome')"):
     
     # Update History
@@ -138,7 +179,8 @@ if prompt := st.chat_input("Enter a system command (e.g., 'Open Chrome')"):
     # Process
     with st.spinner("Processing system request..."):
         try:
-            response = run_agent(prompt)
+            raw_response = run_agent(prompt)
+            response = parse_response(raw_response)
         except Exception as e:
             response = f"Critical Error: {str(e)}"
     

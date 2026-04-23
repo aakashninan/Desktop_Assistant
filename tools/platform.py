@@ -11,18 +11,13 @@ def get_os():
 
 def open_file(path):
     try:
-        # Expand ~ to the full home directory path (e.g., /Users/Aakash)
-        # This allows you to say "open ~/Desktop/file.pdf"
         full_path = os.path.expanduser(path)
-
         os_type = get_os()
 
-        if os_type == "darwin":  # macOS
+        if os_type == "darwin":
             subprocess.run(["open", full_path])
-
         elif os_type == "windows":
             os.startfile(full_path)
-
         elif os_type == "linux":
             subprocess.run(["xdg-open", full_path])
 
@@ -38,10 +33,8 @@ def open_app(app_name):
 
         if os_type == "darwin":
             subprocess.run(["open", "-a", app_name])
-
         elif os_type == "windows":
             subprocess.run(f'start {app_name}', shell=True)
-
         elif os_type == "linux":
             subprocess.run([app_name])
 
@@ -51,9 +44,75 @@ def open_app(app_name):
         return str(e)
 
 
+def close_app(app_name):
+    """
+    Kills a running application by name.
+    Tries multiple name variations to handle cases like
+    'microsoft outlook' -> 'Microsoft Outlook'.
+    """
+    try:
+        os_type = get_os()
+
+        # Build a list of name variations to try
+        variations = [
+            app_name,                          # as given: "microsoft outlook"
+            app_name.title(),                  # title case: "Microsoft Outlook"
+            app_name.capitalize(),             # first word cap: "Microsoft outlook"
+            app_name.replace(" ", ""),         # no spaces: "microsoftoutlook"
+            app_name.title().replace(" ", ""), # title + no spaces: "MicrosoftOutlook"
+        ]
+
+        if os_type == "darwin":
+            # Try osascript first — most reliable for macOS GUI apps
+            title_name = app_name.title()
+            result = subprocess.run(
+                ["osascript", "-e", f'tell application "{title_name}" to quit'],
+                capture_output=True, text=True
+            )
+            if result.returncode == 0:
+                return f"Closed: {app_name}"
+
+            # Fallback: try pkill with each variation
+            for name in variations:
+                result = subprocess.run(
+                    ["pkill", "-ix", name],
+                    capture_output=True, text=True
+                )
+                if result.returncode == 0:
+                    return f"Closed: {app_name}"
+
+            return f"Could not close '{app_name}'. Make sure it is running."
+
+        elif os_type == "windows":
+            for name in variations:
+                exe = name if name.endswith(".exe") else name + ".exe"
+                result = subprocess.run(
+                    f'taskkill /F /IM "{exe}"',
+                    shell=True, capture_output=True,
+                    text=True, encoding="utf-8"
+                )
+                if result.returncode == 0:
+                    return f"Closed: {app_name}"
+
+            return f"Could not close '{app_name}'. Make sure it is running."
+
+        elif os_type == "linux":
+            for name in variations:
+                result = subprocess.run(
+                    ["pkill", "-i", name],
+                    capture_output=True, text=True
+                )
+                if result.returncode == 0:
+                    return f"Closed: {app_name}"
+
+            return f"Could not close '{app_name}'. Make sure it is running."
+
+    except Exception as e:
+        return str(e)
+
+
 def list_files(path="."):
     try:
-        # Expand path here too so "list files in ~/Downloads" works
         full_path = os.path.expanduser(path)
         return os.listdir(full_path)
     except Exception as e:
@@ -67,7 +126,8 @@ def run_command(command):
             shell=True,
             capture_output=True,
             text=True,
-            timeout=5
+            timeout=5,
+            encoding="utf-8"
         )
         return result.stdout if result.stdout else result.stderr
 
@@ -76,19 +136,15 @@ def run_command(command):
 
 
 def get_time():
-    """Returns the current system time."""
     return datetime.datetime.now().strftime("%I:%M %p")
 
 
 def get_date():
-    """Returns today's date."""
     return datetime.date.today().strftime("%B %d, %Y")
 
 
 def get_weather(city="Kochi"):
-    """Fetches current weather for a specific city. Defaults to Kochi."""
     try:
-        # Using wttr.in for a quick, no-API-key weather check
         response = requests.get(f"https://wttr.in/{city}?format=3", timeout=5)
         if response.status_code == 200:
             return response.text.strip()
