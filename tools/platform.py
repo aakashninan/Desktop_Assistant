@@ -3,7 +3,8 @@ import subprocess
 import platform as py_platform
 import datetime
 import requests
-
+import smtplib
+from email.mime.text import MIMEText
 
 def get_os():
     return py_platform.system().lower()
@@ -30,11 +31,29 @@ def open_file(path):
 def open_app(app_name):
     try:
         os_type = get_os()
+        app_name = app_name.lower()
 
         if os_type == "darwin":
             subprocess.run(["open", "-a", app_name])
+
         elif os_type == "windows":
-            subprocess.run(f'start {app_name}', shell=True)
+            apps = {
+                "chrome": "start chrome",
+                "calculator": "start calc",
+                "calc": "start calc",
+                "word": "start winword",
+                "notepad": "start notepad",
+                "vs code": "start code",
+                "vscode": "start code"
+            }
+
+            for key in apps:
+                if key in app_name:
+                    subprocess.run(apps[key], shell=True)
+                    return f"Opened app: {key}"
+
+            return f"App '{app_name}' not supported"
+
         elif os_type == "linux":
             subprocess.run([app_name])
 
@@ -44,6 +63,26 @@ def open_app(app_name):
         return str(e)
 
 
+
+def send_email(to_email, subject, body):
+    try:
+        sender = "your_email@gmail.com"
+        password = "your_app_password"   # ⚠️ use app password
+
+        msg = MIMEText(body)
+        msg["Subject"] = subject
+        msg["From"] = sender
+        msg["To"] = to_email
+
+        server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        server.login(sender, password)
+        server.send_message(msg)
+        server.quit()
+
+        return "Email sent successfully"
+
+    except Exception as e:
+        return str(e)
 def close_app(app_name):
     """
     Kills a running application by name.
