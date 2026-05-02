@@ -1,7 +1,17 @@
 import streamlit as st
 import json
 from agent.core import run_agent
-
+import sys
+def safe_text(text: str) -> str:
+    if not isinstance(text, str):
+        return text
+    text = text.replace("→", "->")
+    return text.encode("utf-8", "ignore").decode("utf-8")
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except Exception:
+    pass
 # -----------------------------
 # PAGE CONFIG
 # -----------------------------
@@ -163,7 +173,7 @@ with chat_placeholder:
             <div style="display: flex; flex-direction: column;">
                 <div class="chat-bubble {role_class}">
                     <b>{"You" if chat["role"] == "user" else "Assistant"}</b><br>
-                    {chat["content"]}
+                    {safe_text(chat["content"])}
                 </div>
             </div>
         """, unsafe_allow_html=True)
@@ -184,5 +194,7 @@ if prompt := st.chat_input("Enter a system command (e.g., 'Open Chrome')"):
         except Exception as e:
             response = f"Critical Error: {str(e)}"
     
+    
     st.session_state.chat_history.append({"role": "assistant", "content": response})
     st.rerun()
+    
