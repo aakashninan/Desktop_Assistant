@@ -11,7 +11,7 @@ PyAudio==0.2.14
 
 # Data & UI (If you're using them for the agent interface)
 streamlit==1.51.0
-pandas==3.0.0
+pandas==2.2.2
 numpy==2.4.2
 
 # Utilities
