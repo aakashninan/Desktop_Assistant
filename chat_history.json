@@ -1,0 +1,746 @@
+[
+  {
+    "id": "1777883440.0754325",
+    "title": "open chrome",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: chrome"
+      }
+    ]
+  },
+  {
+    "id": "1777883721.4218569",
+    "title": "open calc",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: calc"
+      }
+    ]
+  },
+  {
+    "id": "1777883721.4218569",
+    "title": "open calc",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: calc"
+      },
+      {
+        "role": "user",
+        "content": "close calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Closed: calc"
+      }
+    ]
+  },
+  {
+    "id": "1777883967.0717406",
+    "title": "open chrome",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: chrome"
+      }
+    ]
+  },
+  {
+    "id": "1777883967.0717406",
+    "title": "open chrome",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: chrome"
+      },
+      {
+        "role": "user",
+        "content": "close chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Closed: chrome"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File Manger"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File Manger"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File Manger"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Camera"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "1777884500.6187158",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Ms Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File Manger"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open File"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open Camera"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "9798a58e-cb31-4601-a389-e200646998bd",
+    "title": "open chrome",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      }
+    ]
+  },
+  {
+    "id": "5d7122d8-ce74-4a19-82b6-507100dd402f",
+    "title": "close chrome",
+    "messages": [
+      {
+        "role": "user",
+        "content": "close chrome"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Closed: chrome"
+      }
+    ]
+  },
+  {
+    "id": "4df6e3aa-424d-48fb-905a-1d46a505c187",
+    "title": "open clac",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open clac"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "close calc"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Could not close 'calc'. Make sure it is running."
+      },
+      {
+        "role": "user",
+        "content": "open clac"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open calculator"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "open cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "close cmd"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Could not close 'cmd'. Make sure it is running."
+      }
+    ]
+  },
+  {
+    "id": "6ca36aea-8d9e-4d39-8963-b342c9299ec7",
+    "title": "open settings",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open settings"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: name 'apps' is not defined"
+      },
+      {
+        "role": "user",
+        "content": "dreaft a email"
+      },
+      {
+        "role": "assistant",
+        "content": "Error: 'charmap' codec can't encode character '\\u2192' in position 302: character maps to <undefined>"
+      }
+    ]
+  },
+  {
+    "id": "3399bce5-a4b8-46ac-a892-9c3e5b2f03d8",
+    "title": "open word",
+    "messages": [
+      {
+        "role": "user",
+        "content": "open word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: word"
+      },
+      {
+        "role": "user",
+        "content": "close word"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Closed app: word"
+      },
+      {
+        "role": "user",
+        "content": "open excel"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Opened app: excel"
+      },
+      {
+        "role": "user",
+        "content": "close excel"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Closed app: excel"
+      },
+      {
+        "role": "user",
+        "content": "open cal"
+      },
+      {
+        "role": "assistant",
+        "content": "[RESULT]: Trying to open: cal"
+      },
+      {
+        "role": "user",
+        "content": "calc "
+      },
+      {
+        "role": "assistant",
+        "content": "Error: 'charmap' codec can't encode character '\\u2192' in position 302: character maps to <undefined>"
+      }
+    ]
+  }
+]

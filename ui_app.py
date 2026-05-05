@@ -1,6 +1,34 @@
 import streamlit as st
 import json
+import uuid
+import time
+from memory.history import save_chat, load_history
 from agent.core import run_agent
+import sys
+# -----------------------------
+# INIT CHAT SESSION
+# -----------------------------
+if "current_chat" not in st.session_state:
+    st.session_state.current_chat = {
+        "id": str(uuid.uuid4()),
+        "title": "New Chat",
+        "messages": []
+    }
+
+# -----------------------------
+# SAFE TEXT
+# -----------------------------
+def safe_text(text: str) -> str:
+    if not isinstance(text, str):
+        return text
+    text = text.replace("→", "->")
+    return text.encode("utf-8", "ignore").decode("utf-8")
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except:
+    pass
 
 # -----------------------------
 # PAGE CONFIG
@@ -10,6 +38,7 @@ st.set_page_config(
     page_icon="⚡",
     layout="wide"
 )
+
 
 # -----------------------------
 # PROFESSIONAL UI INJECTION
@@ -24,17 +53,71 @@ st.markdown("""
     }
 
     /* Remove Streamlit Header/Footer */
-    header {visibility: hidden;}
+    header {visibility: visible;}
     footer {visibility: hidden;}
     .block-container {padding-top: 2rem; padding-bottom: 0rem;}
 
-    /* Sidebar Styling */
-    [data-testid="stSidebar"] {
-        background-color: #0f172a;
-        color: white;
-        border-right: 1px solid #1e293b;
-    }
+    /* Sidebar background */
+[data-testid="stSidebar"] {
+    background-color: #0b1220;
+}
+}
 
+[data-testid="stSidebar"] * {
+    color: #e5e7eb !important;
+}
+
+/* FIX ALL TEXT COLORS IN SIDEBAR */
+[data-testid="stSidebar"] * {
+    color: #e5e7eb !important;
+}
+
+/* Headings */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #ffffff !important;
+}
+
+/* Labels / captions */
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span {
+    color: #9ca3af !important;
+}
+
+/* Buttons (Recents + Reset) */
+.stButton > button {
+    width: 100%;
+    background-color: transparent;
+    color: #e5e7eb !important;
+    border: none;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+/* Hover effect */
+.stButton > button:hover {
+    background-color: #1f2937;
+    color: #ffffff !important;
+}
+
+/* Active click */
+.stButton > button:focus {
+    background-color: #374151;
+    color: white !important;
+}
+
+/* Recents title */
+.recents-title {
+    color: #9ca3af !important;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+/* Remove ugly borders */
+.stButton {
+    margin-bottom: 5px;
+}
     /* Main Container */
     .main-chat-wrapper {
         max-width: 900px;
@@ -127,62 +210,90 @@ def parse_response(raw_response):
     # Return as-is if not JSON
     return raw_response
 
-# -----------------------------
-# SIDEBAR (Control Center)
-# -----------------------------
 with st.sidebar:
-    st.markdown("<h1 style='font-size: 22px;'>Desktop Assistant</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #94a3b8; font-size: 13px;'>Active Terminal Session</p>", unsafe_allow_html=True)
-    
+
+    if st.button("➕ New Chat"):
+        st.session_state.current_chat = {
+            "id": str(uuid.uuid4()),
+            "title": "New Chat",
+            "messages": []
+        }
+        st.rerun()
+
+    st.markdown("### 🕘 Recents")
+
+    history = load_history()
+
+    for i, chat in enumerate(history[::-1]):
+        chat_id = chat.get("id", str(hash(chat["title"])))
+        key = f"chat_{chat_id}_{i}"   # ✅ UNIQUE
+
+        if st.button(chat["title"], key=key):
+            st.session_state.current_chat = chat
+            st.rerun()
+
     st.markdown("---")
-    
+
     st.markdown("### 📡 System Info")
     st.caption("OS: macOS / Linux Core/Windows")
     st.caption("Status: Connected")
-    
-    if st.button("Reset Environment", use_container_width=True):
-        st.session_state.chat_history = []
-        st.rerun()
 
+    if st.button("Reset Environment", use_container_width=True):
+        st.session_state.current_chat["messages"] = []
+        st.rerun()
 # -----------------------------
 # MAIN INTERFACE
 # -----------------------------
 st.markdown("## Workspace")
 st.markdown("<p style='color: #64748b;'>Control your local environment via natural language.</p>", unsafe_allow_html=True)
 
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
-
-# Chat Area
+# -----------------------------
+# DISPLAY CHAT
+# -----------------------------
 chat_placeholder = st.container()
 
 with chat_placeholder:
-    for chat in st.session_state.chat_history:
+    for chat in st.session_state.current_chat["messages"]:
         role_class = "user-bubble" if chat["role"] == "user" else "assistant-bubble"
         st.markdown(f"""
             <div style="display: flex; flex-direction: column;">
                 <div class="chat-bubble {role_class}">
                     <b>{"You" if chat["role"] == "user" else "Assistant"}</b><br>
-                    {chat["content"]}
+                    {safe_text(chat["content"])}
                 </div>
             </div>
         """, unsafe_allow_html=True)
 
 # -----------------------------
-# ACTION BAR (Bottom Fixed-Style)
+# INPUT
 # -----------------------------
-if prompt := st.chat_input("Enter a system command (e.g., 'Open Chrome')"):
-    
-    # Update History
-    st.session_state.chat_history.append({"role": "user", "content": prompt})
-    
+if prompt := st.chat_input("Enter a system command..."):
+
+    # Add user message
+    st.session_state.current_chat["messages"].append({
+        "role": "user",
+        "content": prompt
+    })
+
     # Process
-    with st.spinner("Processing system request..."):
+    with st.spinner("Processing..."):
         try:
-            raw_response = run_agent(prompt)
-            response = parse_response(raw_response)
+            raw = run_agent(prompt)
+            response = raw if isinstance(raw, str) else str(raw)
         except Exception as e:
-            response = f"Critical Error: {str(e)}"
-    
-    st.session_state.chat_history.append({"role": "assistant", "content": response})
+            response = f"Error: {str(e)}"
+
+    # Add assistant response
+    st.session_state.current_chat["messages"].append({
+        "role": "assistant",
+        "content": response
+    })
+
+    # Auto title (only first message)
+    if st.session_state.current_chat["title"] == "New Chat":
+        st.session_state.current_chat["title"] = prompt[:40]
+
+    # Save full chat session
+    save_chat(st.session_state.current_chat)
+
     st.rerun()

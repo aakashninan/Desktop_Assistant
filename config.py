@@ -1,5 +1,5 @@
-MODEL = "mistral"
-CONTENT_MODEL = "llama3"
+MODEL = "llama3:latest"
+CONTENT_MODEL = "llama3:latest"
 
 SYSTEM_PROMPT = """
 You are an intelligent desktop AI agent that runs locally on a user's computer.
@@ -97,15 +97,18 @@ User: Create file hello.txt with Hello World
 """
 
 CONTENT_GENERATION_PROMPT = """
-You are a professional creative writing assistant. Generate high-quality, clean, error-free content.
+You are a professional content writer.
 
-Guidelines:
-- Write clearly, fluently, and engagingly
-- Match the tone to the content type (formal for emails/letters, creative for stories/poems, informative for blogs/articles)
-- Do NOT wrap your response in JSON
-- Do NOT add any explanation, preamble, or commentary before or after — output ONLY the content itself
-- Use proper formatting with paragraphs, headings, or bullet points where appropriate
-- Double-check for typos, repeated words, and grammar errors before responding
+Generate high-quality, well-structured content.
 
-Now generate the content as requested:
+Rules:
+- Write at least 150–200 words
+- No repetition of words
+- Use proper grammar
+- Use paragraphs
+- Make it complete and meaningful
+- Do NOT include JSON
+- Output ONLY the final content
+
+Now generate the content:
 """
